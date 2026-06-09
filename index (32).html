@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>조현 · 이음컴퍼니</title>
+<meta name="description" content="이음컴퍼니 대표 조현 — 430헤어 · 리안헤어 호남지사 · 본투비 아카데미">
+<meta property="og:title" content="조현 · 이음컴퍼니 대표">
+<meta property="og:description" content="430헤어 · 리안헤어 호남지사 · 본투비 아카데미">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --ink:#1B1714;
+    --ink-2:#241E18;
+    --ink-3:#2E2720;
+    --paper:#ECE3D2;
+    --paper-dim:#A99C84;
+    --paper-faint:#6E6453;
+    --gold:#C9A35B;
+    --gold-bright:#E6C681;
+    --line:rgba(201,163,91,.22);
+    --display:'Gowun Batang', serif;
+    --latin:'Cormorant Garamond', serif;
+    --body:'Pretendard', -apple-system, sans-serif;
+    --col:448px;
+    --thread-x:30px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    font-family:var(--body);
+    background:var(--ink);
+    color:var(--paper);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    padding-bottom:88px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  /* warm atmospheric glow */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(201,163,91,.14), transparent 60%),
+      radial-gradient(80% 50% at 100% 110%, rgba(201,163,91,.05), transparent 60%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .card{
+    position:relative;
+    z-index:1;
+    max-width:var(--col);
+    margin:0 auto;
+    padding:56px 30px 48px;
+  }
+
+  /* ── the 이음 thread ── */
+  .thread{
+    position:absolute;
+    left:var(--thread-x);
+    top:64px;
+    bottom:40px;
+    width:1.5px;
+    background:linear-gradient(180deg,
+      transparent 0%,
+      var(--gold) 6%,
+      var(--gold) 94%,
+      transparent 100%);
+    transform-origin:top;
+    transform:scaleY(0);
+    animation:draw 1.4s cubic-bezier(.7,0,.2,1) .2s forwards;
+    opacity:.55;
+  }
+  @keyframes draw{to{transform:scaleY(1);}}
+
+  /* section anchor node sitting on the thread */
+  .node{
+    position:relative;
+    padding-left:38px;
+  }
+  .node::before{
+    content:"";
+    position:absolute;
+    left:-7.5px;            /* aligns onto thread (30 - 7.5 from card padding) */
+    top:.55em;
+    width:9px;height:9px;
+    border-radius:50%;
+    background:var(--ink);
+    border:1.5px solid var(--gold);
+    box-shadow:0 0 0 3px var(--ink);
+    opacity:0;
+    transform:scale(.4);
+    animation:pop .5s cubic-bezier(.34,1.56,.64,1) forwards;
+  }
+  @keyframes pop{to{opacity:1;transform:scale(1);}}
+
+  /* ── hero ── */
+  .hero{margin-bottom:52px;}
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    margin-bottom:18px;
+  }
+  .name{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:clamp(52px,17vw,70px);
+    line-height:1;
+    letter-spacing:.04em;
+    color:var(--paper);
+    margin-bottom:8px;
+  }
+  .name-latin{
+    font-family:var(--latin);
+    font-size:20px;
+    letter-spacing:.42em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    font-weight:500;
+    margin-bottom:24px;
+    padding-left:2px;
+  }
+  .role{
+    font-size:15px;
+    color:var(--paper);
+    font-weight:500;
+    margin-bottom:14px;
+  }
+  .role b{color:var(--gold-bright);font-weight:600;}
+  .tagline{
+    font-family:var(--display);
+    font-size:17px;
+    line-height:1.7;
+    color:var(--paper-dim);
+    max-width:30ch;
+  }
+
+  /* ── section shell ── */
+  .section{margin-bottom:46px;}
+  .label{
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+    font-weight:600;
+    margin-bottom:20px;
+  }
+
+  /* ── brand cards (expandable) ── */
+  .brands{display:flex;flex-direction:column;gap:12px;}
+  .brand{
+    background:linear-gradient(180deg,var(--ink-2),var(--ink));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 20px;
+    display:flex;flex-direction:column;gap:0;
+    transition:border-color .3s,transform .3s;
+  }
+  .brand.has-values{cursor:pointer;}
+  .brand:hover{border-color:rgba(201,163,91,.45);}
+  .brand.has-values:hover{transform:translateY(-2px);}
+  .brand-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .brand-name{
+    font-family:var(--display);font-size:21px;font-weight:700;
+    color:var(--paper);letter-spacing:.02em;
+  }
+  .brand-sub{
+    display:block;font-family:var(--body);font-size:12px;
+    color:var(--paper-faint);font-weight:400;margin-top:4px;
+  }
+  .brand-right{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;}
+  .brand-role{font-size:12.5px;color:var(--gold);white-space:nowrap;font-weight:500;}
+  .brand-chevron{
+    font-size:14px;color:var(--gold);opacity:.7;
+    transition:transform .3s cubic-bezier(.4,0,.2,1);
+    line-height:1;
+  }
+  .brand.open .brand-chevron{transform:rotate(180deg);}
+  .brand-tagline{
+    font-family:var(--display);font-size:15px;
+    color:var(--paper-dim);margin-top:10px;line-height:1.45;
+  }
+  .brand-tagline em{
+    display:block;font-style:normal;font-size:11px;
+    letter-spacing:.1em;color:var(--paper-faint);margin-top:3px;
+  }
+  .brand-values{
+    max-height:0;overflow:hidden;opacity:0;width:100%;
+    transition:max-height .38s cubic-bezier(.4,0,.2,1),opacity .3s;
+  }
+  .brand.open .brand-values{max-height:220px;opacity:1;}
+  .brand-values ul{
+    list-style:none;padding:14px 0 2px;
+    border-top:1px solid var(--line);margin-top:12px;
+    display:flex;flex-direction:column;gap:9px;
+  }
+  .brand-values li{
+    font-size:13px;color:var(--paper-dim);line-height:1.4;
+    display:flex;align-items:flex-start;gap:9px;
+  }
+  .brand-values li::before{content:"·";color:var(--gold);flex-shrink:0;font-size:16px;line-height:1.2;}
+
+  /* ── photo gallery ── */
+  .gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .gphoto{
+    border-radius:13px;overflow:hidden;aspect-ratio:1;
+    background:var(--ink-2);border:1px solid var(--line);
+    position:relative;
+  }
+  .gphoto img{width:100%;height:100%;object-fit:cover;display:block;}
+  .gphoto.empty{display:flex;align-items:center;justify-content:center;}
+  .gphoto.empty::after{
+    content:"";width:30px;height:30px;opacity:.3;
+    background:center/30px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ECE3D2' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpolyline points='21 15 16 10 5 21'/%3E%3C/svg%3E");
+  }
+  .glabel{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(transparent,rgba(15,12,10,.8));
+    color:var(--paper);font-size:11.5px;font-weight:500;
+    padding:20px 12px 10px;
+  }
+
+  /* ── 지점 그룹 ── */
+  .group{margin-bottom:20px;}
+  .group:last-child{margin-bottom:0;}
+  .group-head{display:flex;align-items:baseline;gap:10px;margin-bottom:11px;}
+  .group-head .gname{
+    font-family:var(--display);
+    font-size:14px;font-weight:700;color:var(--gold-bright);letter-spacing:.02em;
+  }
+  .group-head .gcount{font-size:10.5px;color:var(--paper-faint);letter-spacing:.12em;}
+  .places{display:flex;flex-direction:column;gap:8px;}
+  .place{
+    display:flex;align-items:center;gap:13px;
+    padding:11px 15px 11px 11px;
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:13px;
+    color:var(--paper);
+    text-decoration:none;
+    transition:border-color .25s,background .25s,transform .25s;
+  }
+  .place:hover{border-color:rgba(201,163,91,.5);background:var(--ink-3);transform:translateY(-2px);}
+  .thumb{
+    width:50px;height:50px;flex-shrink:0;
+    border-radius:9px;
+    background:var(--ink-3) center/cover no-repeat;
+    border:1px solid var(--line);
+    position:relative;overflow:hidden;
+  }
+  .thumb.empty::after{
+    content:"";position:absolute;inset:0;
+    background:center/22px no-repeat
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A99C84' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Cline x1='20' y1='4' x2='8.12' y2='15.88'/%3E%3Cline x1='14.47' y1='14.48' x2='20' y2='20'/%3E%3Cline x1='8.12' y1='8.12' x2='12' y2='12'/%3E%3C/svg%3E");
+    opacity:.7;
+  }
+  .p-body{flex:1;min-width:0;}
+  .p-name{font-family:var(--display);font-size:17px;font-weight:700;color:var(--paper);line-height:1.2;}
+  .p-info{font-size:11.5px;color:var(--paper-dim);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .p-info .tag{color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:10px;}
+  .p-arrow{color:var(--gold);opacity:.55;flex-shrink:0;font-size:22px;line-height:1;}
+  .place:hover .p-arrow{opacity:1;}
+
+  /* ── contact rows ── */
+  .contacts{display:flex;flex-direction:column;}
+  .contact{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:15px 4px;
+    border-bottom:1px solid var(--line);
+    color:var(--paper);
+    text-decoration:none;
+    transition:padding-left .25s;
+  }
+  .contacts .contact:last-child{border-bottom:none;}
+  a.contact:hover{padding-left:8px;}
+  .c-key{
+    font-size:10.5px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    width:74px;
+    flex-shrink:0;
+    font-weight:600;
+  }
+  .c-val{font-size:14.5px;color:var(--paper);overflow-wrap:anywhere;}
+  .c-val.dim{color:var(--paper-dim);}
+
+  .placeholder{
+    color:#9a6b4a !important;
+    font-style:italic;
+  }
+
+  /* ── footer mark ── */
+  .footer{
+    margin-top:8px;
+    padding-left:38px;
+    font-family:var(--latin);
+    font-size:13px;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:var(--paper-faint);
+  }
+
+  /* ── sticky action bar ── */
+  .bar{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:20;
+    display:flex;
+    gap:10px;
+    max-width:var(--col);
+    margin:0 auto;
+    padding:14px 18px calc(14px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg,rgba(27,23,20,0),rgba(27,23,20,.92) 32%,var(--ink));
+  }
+  .act{
+    flex:1;
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    padding:14px 8px;
+    border-radius:12px;
+    font-family:var(--body);
+    font-size:13.5px;
+    font-weight:600;
+    cursor:pointer;
+    border:1px solid var(--line);
+    background:var(--ink-2);
+    color:var(--paper);
+    transition:border-color .25s,background .25s;
+  }
+  .act:hover{border-color:rgba(201,163,91,.6);background:var(--ink-3);}
+  .act.primary{
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+    color:#241a08;
+    border-color:transparent;
+  }
+  .act.primary:hover{filter:brightness(1.05);}
+  .act svg{width:16px;height:16px;}
+
+  /* ── QR modal ── */
+  .overlay{
+    position:fixed;inset:0;z-index:40;
+    display:none;
+    align-items:center;justify-content:center;
+    padding:24px;
+    background:rgba(15,12,10,.78);
+    backdrop-filter:blur(6px);
+  }
+  .overlay.open{display:flex;}
+  .modal{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:30px 28px 26px;
+    text-align:center;
+    max-width:300px;width:100%;
+  }
+  .modal h3{
+    font-family:var(--display);
+    font-size:20px;color:var(--paper);
+    margin-bottom:6px;
+  }
+  .modal p{font-size:12.5px;color:var(--paper-dim);margin-bottom:20px;}
+  #qr{
+    background:#fff;
+    padding:14px;
+    border-radius:12px;
+    display:inline-block;
+    line-height:0;
+  }
+  #qr img,#qr canvas{display:block;}
+  .modal-close{
+    margin-top:22px;
+    width:100%;
+    padding:12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:transparent;
+    color:var(--paper-dim);
+    font-family:var(--body);font-size:13px;font-weight:600;
+    cursor:pointer;
+  }
+  .modal-close:hover{color:var(--paper);border-color:rgba(201,163,91,.5);}
+
+  /* toast */
+  .toast{
+    position:fixed;
+    left:50%;bottom:104px;
+    transform:translateX(-50%) translateY(12px);
+    z-index:60;
+    background:var(--gold);
+    color:#241a08;
+    font-size:13px;font-weight:600;
+    padding:11px 22px;border-radius:30px;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s,transform .3s;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  :focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px;border-radius:4px;}
+
+  @media (prefers-reduced-motion:reduce){
+    .thread{animation:none;transform:scaleY(1);}
+    .node::before{animation:none;opacity:1;transform:scale(1);}
+    *{transition:none !important;}
+  }
+
+  @media (max-width:380px){
+    .card{padding:48px 22px 40px;}
+    .name{font-size:clamp(46px,16vw,60px);}
+  }
+</style>
+</head>
+<body>
+
+<main class="card">
+  <div class="thread" aria-hidden="true"></div>
+
+  <!-- HERO -->
+  <header class="hero node" style="--d:0s">
+    <div class="eyebrow">이음컴퍼니 · IEUM COMPANY</div>
+    <h1 class="name">조현</h1>
+    <div class="name-latin">Jo Hyun</div>
+    <p class="role"><b>이음컴퍼니</b> 대표</p>
+    <p class="tagline">사람과 브랜드를 잇습니다.<br>광주·호남의 미용을 만들어 갑니다.</p>
+  </header>
+
+  <!-- BRANDS -->
+  <section class="section node">
+    <div class="label">운영 브랜드</div>
+    <div id="brandCards"></div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="section node">
+    <div class="label">갤러리</div>
+    <div id="photoGallery"></div>
+  </section>
+
+  <!-- 지점 -->
+  <section class="section node">
+    <div class="label">지점 안내</div>
+    <div id="placeGroups"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section node">
+    <div class="label">연락</div>
+    <div class="contacts">
+      <a class="contact" id="telRow" href="#">
+        <span class="c-key">전화</span>
+        <span class="c-val placeholder">010-0000-0000 (입력 필요)</span>
+      </a>
+      <a class="contact" id="mailRow" href="#">
+        <span class="c-key">이메일</span>
+        <span class="c-val placeholder">이메일 주소 (입력 필요)</span>
+      </a>
+      <a class="contact" href="https://instagram.com/ieumcompany" target="_blank" rel="noopener">
+        <span class="c-key">인스타</span>
+        <span class="c-val">@ieumcompany</span>
+      </a>
+      <a class="contact" href="https://map.naver.com/v5/search/광주광역시 서구 치평로 76" target="_blank" rel="noopener">
+        <span class="c-key">오피스</span>
+        <span class="c-val dim">광주 서구 치평로 76, 3층 302호</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="footer">이음 · 잇다</div>
+</main>
+
+<!-- ACTION BAR -->
+<nav class="bar">
+  <button class="act primary" id="shareBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>
+    공유하기
+  </button>
+  <button class="act" id="qrBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><line x1="14" y1="14" x2="14" y2="14"/><line x1="20" y1="14" x2="20" y2="14"/><line x1="14" y1="20" x2="14" y2="20"/><line x1="20" y1="20" x2="20" y2="20"/><line x1="17" y1="17" x2="17" y2="17"/></svg>
+    QR
+  </button>
+  <button class="act" id="saveBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    연락처 저장
+  </button>
+</nav>
+
+<!-- QR MODAL -->
+<div class="overlay" id="qrOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="QR 코드">
+    <h3>QR 코드</h3>
+    <p>스캔하면 이 명함이 열립니다</p>
+    <div id="qr"></div>
+    <button class="modal-close" id="qrClose">닫기</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">링크가 복사되었습니다</div>
+
+<script>
+/* ===== 편집 영역: 아래 값만 바꾸면 명함이 완성됩니다 ===== */
+const DATA = {
+  name:  "조현",
+  title: "이음컴퍼니 대표",
+  phone: "010-5147-9850",
+  email: "whwhgusl@naver.com",
+  org:   "이음컴퍼니",
+  address: "광주광역시 서구 치평로 76, 3층 302호",
+  instagram: "ieumcompany",
+  // 지점: url만 넣으면 됩니다. autoPreview가 true면 네이버 썸네일 자동 시도.
+  // img를 직접 넣으면(예: img:"photo.jpg") 자동 미리보기 대신 그 사진을 씁니다.
+  // 브랜드 소개 데이터
+  brandData: [
+    {
+      name:"430헤어", role:"대표", sub:"광주 직영 5개점 운영",
+      tagline:"머리 하기 좋은 시간",
+      tagline_en:"Best time to get our hair done",
+      values:["거품 없는 합리적인 가격정책","품격 높은 고객 중심 서비스","구성원의 일과 삶의 균형","가맹 점주와 미래가치의 공유"]
+    },
+    {
+      name:"리안헤어", role:"호남 지사장", sub:"호남 지역 지사 총괄",
+      tagline:"아름다움을 창조하는 헤어네트워크 프랜차이즈",
+      tagline_en:"",
+      values:["인간존중 · 정도경영 · 공생경영의 정신","미용기술인 · 경영전문가 · 자본의 삼위일체 조화","K-뷰티를 세계에 알리는 헤어 프랜차이즈"]
+    },
+    {
+      name:"본투비 아카데미", role:"대표", sub:"미용 교육 · 강의",
+      tagline:"미용인의 성장을 잇는 교육 플랫폼",
+      tagline_en:"", values:[]
+    }
+  ],
+  // 갤러리 사진 (url에 이미지 주소를 넣어주세요)
+  photos:[
+    {url:"", label:"430헤어 일곡점"},
+    {url:"", label:"430헤어 수완점"},
+    {url:"", label:"430헤어 금호점"},
+    {url:"", label:"430헤어 상무점"},
+    {url:"", label:"430헤어 첨단점"},
+    {url:"", label:"리안헤어 계림점"}
+  ],
+  autoPreview: true,
+  groups: [
+    { brand:"430헤어", places:[
+      { name:"430헤어 일곡점", url:"https://naver.me/FZojt65F", img:"", info:"" },
+      { name:"430헤어 수완점", url:"https://naver.me/5K6vxV9W", img:"", info:"" },
+      { name:"430헤어 금호점", url:"https://naver.me/5FEgoHn1", img:"", info:"" },
+      { name:"430헤어 상무점", url:"https://naver.me/xVRKe2br", img:"", info:"" },
+      { name:"430헤어 첨단점", url:"https://naver.me/FqIGjq7x", img:"", info:"" }
+    ]},
+    { brand:"리안헤어", places:[
+      { name:"리안헤어 계림점", url:"https://naver.me/xZVZ2k9Q", img:"", info:"" }
+    ]}
+  ]
+};
+/* ==================================================== */
+
+// 전화
+if(DATA.phone){
+  const r=document.getElementById('telRow');
+  r.href='tel:'+DATA.phone.replace(/[^0-9+]/g,'');
+  r.querySelector('.c-val').textContent=DATA.phone;
+  r.querySelector('.c-val').classList.remove('placeholder');
+}
+// 이메일
+if(DATA.email){
+  const r=document.getElementById('mailRow');
+  r.href='mailto:'+DATA.email;
+  r.querySelector('.c-val').textContent=DATA.email;
+  r.querySelector('.c-val').classList.remove('placeholder');
+}
+// 브랜드 카드 렌더링
+function renderBrands(){
+  const wrap=document.getElementById('brandCards');
+  const list=document.createElement('div');
+  list.className='brands';
+  DATA.brandData.forEach(b=>{
+    const div=document.createElement('div');
+    div.className='brand'+(b.values&&b.values.length?' has-values':'');
+    const chevron=b.values&&b.values.length?'<span class="brand-chevron">▾</span>':'';
+    let html=`<div class="brand-top">
+      <span class="brand-name">${b.name}<span class="brand-sub">${b.sub}</span></span>
+      <span class="brand-right"><span class="brand-role">${b.role}</span>${chevron}</span>
+    </div>`;
+    if(b.tagline){
+      html+=`<div class="brand-tagline">${b.tagline}${b.tagline_en?'<em>'+b.tagline_en+'</em>':''}</div>`;
+    }
+    if(b.values&&b.values.length){
+      html+=`<div class="brand-values"><ul>${b.values.map(v=>`<li>${v}</li>`).join('')}</ul></div>`;
+    }
+    div.innerHTML=html;
+    if(b.values&&b.values.length){
+      div.addEventListener('click',()=>div.classList.toggle('open'));
+    }
+    list.appendChild(div);
+  });
+  wrap.appendChild(list);
+}
+// 갤러리 렌더링
+function renderGallery(){
+  const wrap=document.getElementById('photoGallery');
+  const grid=document.createElement('div');
+  grid.className='gallery';
+  const slots=DATA.photos.length?DATA.photos:[{url:'',label:''},{url:'',label:''},{url:'',label:''},{url:'',label:''}];
+  slots.forEach(p=>{
+    const div=document.createElement('div');
+    div.className='gphoto'+(p.url?'':' empty');
+    if(p.url){
+      div.innerHTML=`<img src="${p.url}" alt="${p.label||''}">`;
+      if(p.label) div.innerHTML+=`<span class="glabel">${p.label}</span>`;
+    }
+    grid.appendChild(div);
+  });
+  wrap.appendChild(grid);
+}
+renderBrands();
+renderGallery();
+// 지점 렌더링
+function renderPlaces(){
+  const wrap=document.getElementById('placeGroups');
+  wrap.innerHTML='';
+  DATA.groups.forEach(g=>{
+    const sec=document.createElement('div');
+    sec.className='group';
+    sec.innerHTML='<div class="group-head"><span class="gname">'+g.brand+'</span><span class="gcount">'+g.places.length+'개점</span></div>';
+    const list=document.createElement('div');
+    list.className='places';
+    g.places.forEach(p=>{
+      const a=document.createElement('a');
+      a.className='place';
+      a.target='_blank'; a.rel='noopener';
+      if(p.url){ a.href=p.url; }
+      else { a.href='#'; a.addEventListener('click',e=>{e.preventDefault();showToast('네이버 링크 준비 중입니다');}); }
+      const thumbCls=p.img?'thumb':'thumb empty';
+      const thumbStyle=p.img?(' style="background-image:url(\''+p.img+'\')"'):'';
+      const info=p.info?p.info:(p.url?'<span class="tag">네이버 플레이스</span>':'<span class="tag">링크 준비중</span>');
+      a.innerHTML='<span class="'+thumbCls+'"'+thumbStyle+'></span>'+
+        '<span class="p-body"><span class="p-name">'+p.name+'</span><span class="p-info">'+info+'</span></span>'+
+        '<span class="p-arrow">&rsaquo;</span>';
+      list.appendChild(a);
+      if(DATA.autoPreview && p.url && !p.img) fetchPreview(p.url,a);
+    });
+    sec.appendChild(list);
+    wrap.appendChild(sec);
+  });
+}
+// 네이버 플레이스 자동 미리보기 (microlink 경유, 실패 시 기본 아이콘 유지)
+function fetchPreview(url,el){
+  const thumb=el.querySelector('.thumb');
+  fetch('https://api.microlink.io/?url='+encodeURIComponent(url))
+    .then(r=>r.json())
+    .then(j=>{
+      if(j.status==='success'&&j.data){
+        const img=(j.data.image&&j.data.image.url)||(j.data.logo&&j.data.logo.url);
+        if(img){
+          const pre=new Image();
+          pre.onload=()=>{thumb.style.backgroundImage="url('"+img+"')";thumb.classList.remove('empty');};
+          pre.src=img;
+        }
+      }
+    }).catch(()=>{});
+}
+renderPlaces();
+
+// node 점이 위에서 아래로 순차적으로 나타나도록 지연 주입
+const styleStagger=document.createElement('style');
+let css='';
+document.querySelectorAll('.node').forEach((n,i)=>{
+  n.classList.add('node-'+i);
+  css+=`.node-${i}::before{animation-delay:${0.4+i*0.22}s;}`;
+});
+styleStagger.textContent=css;
+document.head.appendChild(styleStagger);
+
+// 공유
+const shareBtn=document.getElementById('shareBtn');
+shareBtn.addEventListener('click',async()=>{
+  const shareData={title:DATA.name+' · '+DATA.org, text:DATA.name+' '+DATA.title, url:location.href};
+  if(navigator.share){
+    try{await navigator.share(shareData);}catch(e){}
+  }else{
+    copyLink();
+  }
+});
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(()=>showToast('링크가 복사되었습니다'))
+  .catch(()=>showToast('링크: '+location.href));
+}
+
+// QR
+const overlay=document.getElementById('qrOverlay');
+let qrMade=false;
+document.getElementById('qrBtn').addEventListener('click',()=>{
+  if(!qrMade){
+    new QRCode(document.getElementById('qr'),{
+      text:location.href, width:190, height:190,
+      colorDark:'#1B1714', colorLight:'#ffffff',
+      correctLevel:QRCode.CorrectLevel.M
+    });
+    qrMade=true;
+  }
+  overlay.classList.add('open');
+});
+document.getElementById('qrClose').addEventListener('click',()=>overlay.classList.remove('open'));
+overlay.addEventListener('click',e=>{if(e.target===overlay)overlay.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')overlay.classList.remove('open');});
+
+// vCard 저장
+document.getElementById('saveBtn').addEventListener('click',()=>{
+  const v=[
+    'BEGIN:VCARD','VERSION:3.0',
+    'N:;'+DATA.name+';;;','FN:'+DATA.name,
+    'ORG:'+DATA.org,'TITLE:'+DATA.title,
+    DATA.phone?('TEL;TYPE=CELL:'+DATA.phone):'',
+    DATA.email?('EMAIL:'+DATA.email):'',
+    'ADR;TYPE=WORK:;;'+DATA.address+';;;;',
+    'URL:https://instagram.com/'+DATA.instagram,
+    'URL:'+location.href,
+    'END:VCARD'
+  ].filter(Boolean).join('\n');
+  const blob=new Blob([v],{type:'text/vcard;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=DATA.name+'_이음컴퍼니.vcf';
+  document.body.appendChild(a);a.click();a.remove();
+  showToast('연락처 파일을 저장했습니다');
+});
+
+// toast
+let toastT;
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),2200);
+}
+</script>
+</body>
+</html>
